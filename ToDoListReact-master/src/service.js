@@ -7,7 +7,7 @@ export default {
     const result = await axios.get(`${process.env.REACT_APP_API_URL}items`)  
     console.log(result.data);
 
-    return result.data.items;
+    return result.data;
   },
 
 
