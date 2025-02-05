@@ -14,7 +14,7 @@ export default {
   addTask: async(name)=>{
     console.log('addTask', name)
     //TODO
-    const result = await axios.post(`${process.env.REACT_APP_API_URL}/items`, {
+    const result = await axios.post(`${process.env.REACT_APP_API_URL}items`, {
       Name:name,
       IsComplete:false
     })    
@@ -26,7 +26,7 @@ export default {
   setCompleted: async(id, isComplete)=>{
     console.log('setCompleted', {id, isComplete})
     console.log('setCompleted', { id, isComplete });
-    const result = await axios.put(`${process.env.REACT_APP_API_URL}/items/${id}?iscomplete=${isComplete}`, {
+    const result = await axios.put(`${process.env.REACT_APP_API_URL}items/${id}?iscomplete=${isComplete}`, {
     });
       
     return {result};
@@ -35,7 +35,7 @@ export default {
   deleteTask:async(id)=>{
     console.log('deleteTask')
 
-    const result = await axios.delete(`${process.env.REACT_APP_API_URL}/items/${id}`, {
+    const result = await axios.delete(`${process.env.REACT_APP_API_URL}items/${id}`, {
     });
 
   }
