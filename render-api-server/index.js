@@ -1,22 +1,28 @@
-import renderApi from '@api/render-api';
-import express from 'express';
-import dotenv from 'dotenv';
+app.get('/render-apps', async (req, res) => {
+  try {
+    const apiKey = process.env.RENDER_API_KEY;
+    if (!apiKey) {
+      throw new Error('RENDER_API_KEY is missing');
+    }
 
-dotenv.config();
+    const response = await axios.get('https://api.render.com/v1/services', {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+    });
 
-// אוטנטיקציה עם Render API
-renderApi.auth(process.env.RENDER_API_KEY); // הכנס את ה-API Key שלך
-renderApi.listServices({includePreviews: 'true', limit: '20'})
-  .then(({ data }) => console.log(data))
-  .catch(err => console.error(err));
-
-const app = express();
-const port = process.env.PORT || 3000; // Render נותן לך את הפורט דרך משתנה סביבה
-
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error fetching data from Render API:', error.response?.status || error.message);
+    res.status(error.response?.status || 500).json({
+      message: 'Error fetching data',
+      error: error.message,
+      details: error.response?.data,
+    });
+  }
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`✅ Server running at http://localhost:${PORT}`);
 });
