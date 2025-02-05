@@ -1,3 +1,11 @@
+import renderApi from '@api/render-api';
+import express from 'express';
+import dotenv from 'dotenv';
+
+dotenv.config();
+const app = express();
+const port = process.env.PORT; 
+
 app.get('/render-apps', async (req, res) => {
   try {
     const apiKey = process.env.RENDER_API_KEY;
