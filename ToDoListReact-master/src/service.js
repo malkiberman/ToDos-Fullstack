@@ -13,7 +13,7 @@ export default {
 
   addTask: async(name)=>{
     console.log('addTask', name)
-    //TODO
+   
     const result = await axios.post(`${process.env.REACT_APP_API_URL}items`, {
       Name:name,
       IsComplete:false

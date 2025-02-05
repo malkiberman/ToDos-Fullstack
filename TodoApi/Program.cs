@@ -41,7 +41,7 @@ app.MapGet("/items/{id}", async (int id, ToDoDbContext db) =>
     await db.Items.FindAsync(id) is Item item ? Results.Ok(item) : Results.NotFound());
 
 
-app.MapPost("/", async (Item item, ToDoDbContext db) =>
+app.MapPost("/items", async (Item item, ToDoDbContext db) =>
 {
     db.Add(item);
     await db.SaveChangesAsync();
