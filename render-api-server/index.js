@@ -6,7 +6,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT; 
 
-app.get('/render-apps', async (req, res) => {
+app.get('/', async (req, res) => {
   try {
     const apiKey = process.env.RENDER_API_KEY;
     if (!apiKey) {
